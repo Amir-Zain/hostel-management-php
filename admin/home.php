@@ -1,9 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
-{
-	header("location:login.php");
-	exit();
+if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
+    header('location:login.php');
+    exit();
 }
 
 ?>
@@ -99,11 +98,9 @@ if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
 		<div class="main-menu-content">
 			<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
 
-				<li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Admin</span></a>
-				</li>
 
 
-				<li class=" nav-item"><a href="add warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
+				<li class=" nav-item"><a href="add_warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
 
 			
 

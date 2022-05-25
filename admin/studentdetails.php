@@ -1,8 +1,7 @@
 <?php
-include("db_connect.php");
-$sql="select * from addstudent_tb";
-$result=mysqli_query($conn,$sql);
-
+include 'db_connect.php';
+$sql = 'select * from addstudent_tb';
+$result = mysqli_query($conn, $sql);
 
 ?>
 <!DOCTYPE html>
@@ -97,11 +96,11 @@ $result=mysqli_query($conn,$sql);
 		<div class="main-menu-content">
 			<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
 
-				<li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Admin</span></a>
-				</li>
+				<!-- <li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Admin</span></a>
+				</li> -->
 
 
-				<li class=" nav-item"><a href="add warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
+				<li class=" nav-item"><a href="add_warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
 
 			
 
@@ -184,7 +183,7 @@ function showUser(str) {
 }
 </script>
 </head>
-							<form method="POST" action="add warden.php" enctype="multipart/form-data">
+							<form method="POST" action="add_warden.php" enctype="multipart/form-data">
 								<div class="card-body collapse in">
 								<div class="card-block">
 									<form class="form">
@@ -196,17 +195,14 @@ function showUser(str) {
 														<label for="projectinput6">Name</label>
 														<select class="select2-B form-control" name="name" onchange="showUser(this.value)">
 															<?php
-															
-															while($row=$result->fetch_assoc())
-															{
-																$a=$row['name'];
-																$id=$row['id'];
 
-															?>
-														<option value="<?php echo $id;?>"><?php echo $a;?></option>
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $a = $row['name'];
+                                                                $id = $row['id']; ?>
+														<option value="<?php echo $id; ?>"><?php echo $a; ?></option>
 														<?php
-													}
-														?>
+                                                            }
+                                                        ?>
 														</select>
 													</div>
 												</div>

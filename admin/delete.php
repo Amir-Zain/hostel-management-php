@@ -4,9 +4,9 @@ if(isset($_GET['id']))
 	$id=$_GET['id'];
 	include("db_connect.php");
 	$result=$conn->query("delete from addwarden_tb where id=$id")or die(mysqli_error());
-	header("location:add warden.php?task=succesfully");
+	header("location:add_warden.php?task=succesfully");
 }
 else{
-	header("location:add warden.php?task=failed");
+	header("location:add_warden.php?task=failed");
 }
 ?>

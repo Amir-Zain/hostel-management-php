@@ -51,7 +51,7 @@
 </div>
 <div class="card-body collapse in">
 <div class="card-block">
-<form class="form-horizontal form-simple" action="loginadmin.php" method="post" novalidate>
+<form class="form-horizontal form-simple" action="loginadmin.php" method="post">
 <fieldset class="form-group position-relative has-icon-left mb-1">
 <input type="text" class="form-control form-control-lg input-lg" id="user-name" placeholder="Your Username" name="username" required>
 <div class="form-control-position">
@@ -69,12 +69,21 @@
 <fieldset>
 <input type="checkbox" id="remember-me" class="chk-remember">
 <label for="remember-me"> Remember Me</label>
+
 </fieldset>
 </div>
 <!-- <div class="col-md-6 col-xs-12 text-xs-center text-md-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div> -->
 </fieldset>
 <button type="submit" class="btn btn-primary btn-lg btn-block ae_login"><i class="icon-unlock2"></i> Login</button>
 </form>
+<label for="remember-me" class="text-danger">
+	<?php
+    if ($_GET['msg']) {
+        echo $_GET['msg']; // print_r($_GET); //remember to add semicolon
+    }
+    ?>
+	</label>
+
 </div>
 </div>
 </div>

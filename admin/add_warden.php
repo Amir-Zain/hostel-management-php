@@ -1,44 +1,43 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
-{
-	header("location:login.php");
-	exit();
+if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
+    header('location:login.php');
+    exit();
 }
-	?>
+    ?>
 <?php
-include("db_connect.php");
+include 'db_connect.php';
   // Create database connection
 
   // Initialize message variable
-  $msg = "";
+  $msg = '';
 
   // If upload button is clicked ...
   if (isset($_POST['upload'])) {
-  	// Get image name
-  	$image = $_FILES['image']['name'];
-  	// Get text
-  	$a = mysqli_real_escape_string($conn, $_POST['name']);
+      // Get image name
+      $image = $_FILES['image']['name'];
+      // Get text
+      $a = mysqli_real_escape_string($conn, $_POST['name']);
 
-  	$b = mysqli_real_escape_string($conn, $_POST['username']);
+      $b = mysqli_real_escape_string($conn, $_POST['username']);
 
-  	$c = mysqli_real_escape_string($conn, $_POST['password']);
-  	$d = mysqli_real_escape_string($conn, $_POST['mobile']);
-  	$e = mysqli_real_escape_string($conn, $_POST['place']);
-  	$f = mysqli_real_escape_string($conn, $_POST['sex']);
+      $c = mysqli_real_escape_string($conn, $_POST['password']);
+      $d = mysqli_real_escape_string($conn, $_POST['mobile']);
+      $e = mysqli_real_escape_string($conn, $_POST['place']);
+      $f = mysqli_real_escape_string($conn, $_POST['sex']);
 
-  	// image file directory
-  	$target = "images/".basename($image);
+      // image file directory
+      $target = 'images/' . basename($image);
 
-  	$sql = "INSERT INTO addwarden_tb (name,username,password,mobile,place,sex,image) VALUES ('$a','$b','$c','$d','$e','$f','$image')";
-  	// execute query
-  	mysqli_query($conn, $sql);
+      $sql = "INSERT INTO addwarden_tb (name,username,password,mobile,place,sex,image) VALUES ('$a','$b','$c','$d','$e','$f','$image')";
+      // execute query
+      mysqli_query($conn, $sql);
 
-  	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-  		$msg = "Image uploaded successfully";
-  	}else{
-  		$msg = "Failed to upload image";
-  	}
+      if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+          $msg = 'Image uploaded successfully';
+      } else {
+          $msg = 'Failed to upload image';
+      }
   }
   //$result = mysqli_query($conn, "SELECT * FROM images");
 ?>
@@ -134,11 +133,11 @@ include("db_connect.php");
 		<div class="main-menu-content">
 			<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
 
-				<li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Admin</span></a>
-				</li>
+				<!-- <li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Admin</span></a>
+				</li> -->
 
 
-				<li class=" nav-item"><a href="add warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
+				<li class=" nav-item"><a href="add_warden.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add Warden</span></a></li>
 
 			
 
@@ -195,7 +194,7 @@ include("db_connect.php");
 								</ul>
 								</div>
 							</div>
-							<form method="POST" action="add warden.php" enctype="multipart/form-data">
+							<form method="POST" action="add_warden.php" enctype="multipart/form-data">
 								<div class="card-body collapse in">
 								<div class="card-block">
 									<form class="form">
@@ -308,12 +307,11 @@ include("db_connect.php");
 											<div class="row">
 												<div class="col-sm-12" style="overflow-x: auto;">
 													<?php
-													include("db_connect.php");
-													$sql="SELECT * FROM addwarden_tb";
-													$result=$conn->query($sql);
-													if($result->num_rows>0)
-													{
-														echo "
+                                                    include 'db_connect.php';
+                                                    $sql = 'SELECT * FROM addwarden_tb';
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        echo "
 													<table id='datatables-example' class='table table-striped table-bordered dataTable no-footer' width='100%'' cellspacing='0' role='grid' aria-describedby='datatables-example_info' style='width: 100%;''>
 														<thead>
 															<tr role='row'>
@@ -326,34 +324,31 @@ include("db_connect.php");
 																<th class='sorting' tabindex='0' aria-controls='datatables-example' rowspan='1' colspan='1' aria-label='Age: activate to sort column ascending' style='width: 62px;'>Photo</th>
 															</tr>
 														</thead>";
-														while($row=$result->fetch_assoc())
-														{
-															echo "
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "
 														<tbody>
 
 
 															<tr role='row' class='odd'>
-																<td class='sorting_1'>".$row['name']."</td>
-																<td>".$row['username']."</td>
-																<td>".$row['password']."</td>
-																<td>".$row['mobile']."</td>
-																<td>".$row['place']."</td>
-																<td>".$row['sex']."</td>
-																<td><img src=".'images/'.$row['image']." width='100' height='100'></td>
+																<td class='sorting_1'>" . $row['name'] . '</td>
+																<td>' . $row['username'] . '</td>
+																<td>' . $row['password'] . '</td>
+																<td>' . $row['mobile'] . '</td>
+																<td>' . $row['place'] . '</td>
+																<td>' . $row['sex'] . '</td>
+																<td><img src=' . 'images/' . $row['image'] . " width='100' height='100'></td>
 																<td>
-																<a href=delete.php?id=".$row['id']."><span style='color:#fff;' class='btn btn-danger glyphicon glyphicon-trash' title='Delete post'></span></a>
+																<a href=delete.php?id=" . $row['id'] . "><span style='color:#fff;' class='btn btn-danger glyphicon glyphicon-trash' title='Delete post'></span></a>
 																</td>
 																</tr>
 														</tbody>";
-														}
-													echo "</table>";
-													}
-													else
-													{
-														echo "0 result";
-													}
-													$conn->close();
-													?>
+                                                        }
+                                                        echo '</table>';
+                                                    } else {
+                                                        echo '0 result';
+                                                    }
+                                                    $conn->close();
+                                                    ?>
 												</div>
 											</div>
 										</div>

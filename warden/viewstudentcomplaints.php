@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
-{
-	header("location:login.php");
-	exit();
+if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) {
+    header('location:login.php');
+    exit();
 }
 ?>
 
@@ -101,8 +100,6 @@ if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
 		<div class="main-menu-content">
 			<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
 
-				<li class=" nav-item"><a href="home.php"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Warden</span></a>
-				</li>
 
 
 				<li class=" nav-item"><a href="addstudent.php"><i class="icon-equalizer"></i><span data-i18n="nav.components.main" class="menu-title">Add student</span></a></li>
@@ -171,12 +168,11 @@ if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
 											<div class="row">
 												<div class="col-sm-12" style="overflow-x: auto;">
 													<?php
-													include("db_connect.php");
-													$sql="SELECT * FROM studentcomplaints_tb";
-													$result=$conn->query($sql);
-													if($result->num_rows>0)
-													{
-														echo "
+                                                    include 'db_connect.php';
+                                                    $sql = 'SELECT * FROM studentcomplaints_tb';
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        echo "
 													<table id='datatables-example' class='table table-striped table-bordered dataTable no-footer' width='100%'' cellspacing='0' role='grid' aria-describedby='datatables-example_info' style='width: 100%;''>
 														<thead>
 															<tr role='row'>
@@ -187,31 +183,28 @@ if(!isset($_SESSION['id'])||(trim($_SESSION['id'])==''))
 																
 															</tr>
 														</thead>";
-														while($row=$result->fetch_assoc())
-														{
-															echo "
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "
 														<tbody>
 
 
 															<tr role='row' class='odd'>
-																<td class='sorting_1'>".$row['name']."</td>
-																<td>".$row['addmission']."</td>
-																<td>".$row['datex']."</td>
-																<td>".$row['complaint']."</td>
+																<td class='sorting_1'>" . $row['name'] . '</td>
+																<td>' . $row['addmission'] . '</td>
+																<td>' . $row['datex'] . '</td>
+																<td>' . $row['complaint'] . '</td>
 																<td>
-																<a href=delete2.php?id=".$row['id']."><span style='color:#fff;' class='btn btn-danger glyphicon glyphicon-trash' title='Delete post'></span></a>
+																<a href=delete2.php?id=' . $row['id'] . "><span style='color:#fff;' class='btn btn-danger glyphicon glyphicon-trash' title='Delete post'></span></a>
 																</td>
 																</tr>
 														</tbody>";
-														}
-													echo "</table>";
-													}
-													else
-													{
-														echo "0 result";
-													}
-													$conn->close();
-													?>
+                                                        }
+                                                        echo '</table>';
+                                                    } else {
+                                                        echo '0 result';
+                                                    }
+                                                    $conn->close();
+                                                    ?>
 													
 
 												</div>

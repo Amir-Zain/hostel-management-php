@@ -70,6 +70,14 @@
 </fieldset>
 <button type="submit" class="btn btn-primary btn-lg btn-block ae_login"><i class="icon-unlock2"></i> Login</button>
 </form>
+
+<label for="remember-me" class="text-danger">
+	<?php
+    if ($_GET['msg']) {
+        echo $_GET['msg']; // print_r($_GET); //remember to add semicolon
+    }
+    ?>
+	</label>
 </div>
 </div>
 </div>
